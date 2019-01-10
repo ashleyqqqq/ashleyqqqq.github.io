@@ -105,14 +105,14 @@ analytics:
 # Site Author
 author:
   name             : "Qing Gao"
-  avatar           : "/images/夜景照广州.jpg" 
+  avatar           : "/images/夜景照广州.jpg"
   bio              : "Data Science Project"
   location         : "Davis, CA"
   email            :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: mailto:your.name@email.com
+      url: mailto: gqgao@ucdavis.edu
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
@@ -123,7 +123,7 @@ author:
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
     - label: "GitHub"
-      icon: "ashleyqqqq"
+      icon: "fab fa-fw fa-github"
       # url: "https://github.com/"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
