@@ -2,8 +2,9 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Data Science"
-    url: /data-science
+  - #title: "Data Science"
+    #url: /machine learning
+
       #https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
