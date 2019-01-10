@@ -1,4 +1,4 @@
 ---
 layout: archive
-permalink: /machine-learning/
+permalink: /data-science/
 title:

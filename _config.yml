@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "Qing Gao"
-  avatar           : "/images/ashley.jpg"
+  avatar           : "/images/夜景照广州.jpg"
   bio              : "Data Science Project"
   location         : "Davis, CA"
   email            :
@@ -115,7 +115,7 @@ author:
       url: "mailto: gqgao@ucdavis.edu"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+      #url: "https://your-website.com"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
@@ -124,7 +124,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://ashleyqqqq.github.io/"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
