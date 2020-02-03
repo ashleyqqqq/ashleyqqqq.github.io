@@ -2,7 +2,7 @@
 title: "About"
 permalink: /about/
 #header:
-#  image:"images/夜景照广州.jpg"
+#  image:"images/ashley.jpg"
 ---
 
-My name is Qing, and I am an undergraduate student in UC Davis. This is the blog for sharing my data science projects.
+Hello, My name is Qing (Ashley). Currently, I am a MA Statistics student at Columbia University. I finished my undergraduate study at UC Davis. This is the blog for sharing my data science projects.
