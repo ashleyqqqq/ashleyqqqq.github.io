@@ -59,6 +59,23 @@ We split the data between Target 0 and 1 and selected 30% from both datasets as 
 
 ## IV. RESULT & DISCUSSION
 Through investigation and exploration of some algorithms with the main dataset which have 53 features, we get the following result. By considering their performance without remedy and with remedy (resampling methods), we will pick some better performance models for further investigation given full dataset with 263 features. We hope to reach a higher performance in the AUC standard by the help of resampling methods and voting classifier. 
+![image](https://drive.google.com/uc?export=view&id=1J6V-VjK0rKrUIFaMMVeYuncl6H1vu97D)
+
++ **SVM.** Although SVM can deal with unbalanced data, the model performance is inferior. The highly unbalanced distribution in the Target can affect SVM’s ability to find a proper margin since there will be few data points in the minority class. For the linear kernel, the accuracy is 60.68%, and the confusion matrix as follows:
+![image](https://drive.google.com/uc?export=view&id=12YpzAQ9QRMuzAHFS9IxJekPI24hGkWAh)
+For rbf Gaussian Kernel, the accuracy is 63.38%, and the confusion matrix is similar to linear kernel.
+
+As the confusion matrix shown, both Type I error and Type II error is high, and the accuracy is not high enough. On the other hand, the training time for both SVM models is more than 6 hours, which is relatively long. Due to the high cost of the training time and low model performance, we decided to stop using this model in our case. 
+
++ **ANN.** With unbalanced data, we tried to use drop out method and L1 and L2 regularization methods to help the model to approximate the target function , but it still falls into the local minima which it predicts all new data point as the class with a higher distribution. Therefore, we concluded that ANN is not capable to handle extreme unbalanced data well. With training model for 150 iterations in upsampling data, ANN results 48.01% accuracy and 0.6325 AUC score, which are worse than the random guessing. With the upsampling methods, ANN does avoid the problem which it guessing one class; however, its model performance was not good enough with around 400 total and more nodes in ANN. Thus, we also decided to stop using this model to seek further improvements.
+
++ **KNN.** Since KNN is based on voting in nearby neighbors, we do not need to use sampling methods in this model. We use voting classifier for 40 KNN with 5 neighbors in our based model to classify the class. The accuracy is 91.43%, but AUC score is only 0.5028. The confusion matrix as follows:
+![image](https://drive.google.com/uc?export=view&id=1V9_gesQ4I9R-5HLIDstuywS-iIM6guE6)
+The model classify most class as target 0, which makes the accuracy is very high; however, it cannot represent our model performance since the false negative is very high and AUC score is around 0.5. 
+
++ **Random Forest.** Since the original data was highly unbalanced, the AUC of the base Random Forest model was 0.5 which indicated that the model just randomly guessed the target value instead of making classifications. Also, for unbalanced data, the accuracy is more than 90%, since the model mostly guess the class with higher distribution. Thus, we use resampling method to evaluate the model. Our benchmark model with the main data after downsampling has an average AUC score of 0.63. The figure 3 is the precision-recall curve for our benchmark model in random forest with no sampling, upsampling and downsampling methods. The precision-recall curve for downsampling method is improved but it is decreased for our upsampling methods. Thus for Random Forest model, we use downsampling methods for further model improvement.
+![image](https://drive.google.com/uc?export=view&id=1roM4hQD7R6tep6Ob8V3ar0KMFtWUgwLn)
+
 
 
 
