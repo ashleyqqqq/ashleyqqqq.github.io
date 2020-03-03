@@ -5,6 +5,7 @@ tags: [data science]
 ---
 
 - Group Members: Shiying Wang, Qing Gao, Ruochen Zhong, Zhixin Zheng, Tianrun Zhu
+[Github] (https://github.com/ashleyqqqq/Home_Credit_Analysis)
 
 ## **ABSTRACT**
 An approach to identify what factors contribute to clients’ default rate and evaluation on lending risk to a specific client by using past data is described in this paper. We use feature engineering to extract and select useful features in order to determine the ability of clients to repay the loan on time. Through the investigation of some trending classification algorithms and the help of the ensemble learning, we hope to improve the performance of our final model. The result shows that our best model is LightGBM with combined data and upsampling method. To go beyond the current model performance, we need more information about clients and more estimators in the LightGBM model to identify clients’ default risk.
@@ -76,6 +77,34 @@ The model classify most class as target 0, which makes the accuracy is very high
 + **Random Forest.** Since the original data was highly unbalanced, the AUC of the base Random Forest model was 0.5 which indicated that the model just randomly guessed the target value instead of making classifications. Also, for unbalanced data, the accuracy is more than 90%, since the model mostly guess the class with higher distribution. Thus, we use resampling method to evaluate the model. Our benchmark model with the main data after downsampling has an average AUC score of 0.63. The figure 3 is the precision-recall curve for our benchmark model in random forest with no sampling, upsampling and downsampling methods. The precision-recall curve for downsampling method is improved but it is decreased for our upsampling methods. Thus for Random Forest model, we use downsampling methods for further model improvement.
 ![image](https://drive.google.com/uc?export=view&id=1roM4hQD7R6tep6Ob8V3ar0KMFtWUgwLn)
 
+In order to improve the benchmark model, we use the full data which combine the datasets with more representative features. We reduce and combine classes of several categorical features, and drop the features with zero feature importance score. The improved model has an average 0.65 AUC score. The confusion matrix is as follows:
+![image](https://drive.google.com/uc?export=view&id=1BQ3Bk5PaXXmdejvPKJEE_8ou2e1kDCge)
+![image](https://drive.google.com/uc?export=view&id=10eaMwwL909HJuCZGXOCbrPRTU7sZ-LdS)
+Because the AUC is the area under the ROC curve, and ROC is likely to be influenced by the imbalanced dataset, we drew a precision and recall curves in figure 4 to double check whether our model really improved. Here, the precision means the proportion of true positive in the sum of true positive and false positive. The recall means the proportion of true positive in the sum of true positive and false negative. In this plot, the curve of our improved model has a higher precision at all levels of recall. Because Precision and Recall curve is insensitive to imbalanced data, this plot proves our improved model works. 
+
++ **LightGBM.** Given the main dataset, we notice lightgbm has a decent performance. Its AUC  is 0.7304234816362317. Its accuracy is 0.9191556873835967. Its false positive is high, but it still correctly predicts some actual negative as Target 1. Also, there is a small number of false negatives. It means this model only misclassified a small number of actual positive(Target 0) as negative. From applicants’ viewpoint, they hope the model to have the smallest number of false negatives as possible. So, more applicants can get loans from Home credits. For the company's financial perspective, we want to reduce the financial loss due to the false positive. Thus, we hope to improve the model in the sense of smaller number of false positives with the trade of the same number of false negative or a larger number of false negatives. The confusion matrix is  as following:
+![image](https://drive.google.com/uc?export=view&id=18zOqH-lwBXZBI4Vy2KxCJjbxahclhI-N)
+Through the help of up sampling in the main data, LightGBM archives 0.7528817679153652 AUC score which is slightly better than the previous LightGBM model. Furthermore, we notice the number of false positives decreases, and the number of correctly predicted negative increases. It means the number of misclassified actual Target 1 decreases. In the ideal situation, we hope the model’s false positive and false negative both decreases. Thus, the company and the applicants are both benefits from the model.
+![image](https://drive.google.com/uc?export=view&id=1yF9_flQ-VXEKWhGIrpqYefeTq4KDNC1c)
+From the exploration of these algorithms, we select those models such as Random forest and LightGBM. These can handle the local minima with or without the help of resampling methods; and also have a decent AUC number. Thus, we use them as the candidate of our final model given full data with 263 features.
+
+With full dataset and up sampling method, we notice that the AUC and accuracy increase again. For the LightGBM without upsampling, the AUC increases to 0.7549517018537376 and accuracy increases to 0.9194513150504046. Also the number of false positive decreases to 7725. For LightGBM with upsampling,  the AUC increases to 0.7528817679153652 and accuracy increases to 0.9190078735501926. The number of false positive decreases to 7688. 
+![image](https://drive.google.com/uc?export=view&id=1XN4NNkjTYSkPBWdo00uA67Oe5MVQIxCG)
+Although LightGBM has distinct high AUC score than other models, its Precision-recall curve is not perform well as Random Forest did. This might be because we use upsampling methods in lightGBM and also the lightGBM model is trained and improved based on the AUC score. 
+
++ **Voting Classifier of 10 KNN, Voting Classifier with 10 LightGBM, Voting Classifier with Random Forest and LightGBM.** For these three classifiers, we notice that they get similar or even worsen AUC score and accuracy. The AUC of voting classifier with KNN is only 0.506511. The AUC of Voting Classifier with LightGBM drops to 0.742841. The AUC of Voting Classifier with LightGBM is around 0.763947. All of these voting classifiers show increased numbers of false which is the least wanted thing from the company’s perspective. The reason behind the decreasing of AUC and accuracy is the Voting Classifier performs best when all of its weak classifier are independent from each other. In our classifier , this is not the case. Thus, there are some degrade in terms of performance.
+
+Overall, our best model is LightGBM with full data and the upsampling method. Since the lightGBM is based on boosted method, we can try to increase its AUC and accuracy by increasing the number of estimators in the classifier. 
+
+## V.	CONCLUSION
+After our data exploration and model selection, we form different models such as Random Forest and LightGBM and make improvements from our base models. By thoroughly comparing all candidates of final models, our final model is lightGBM which has AUC score of approximately 0.75. Since the default risk is dependent on other information which is unobservable, subjective and unstable, it is hard for us to classify a client’s default risk based on the current quantitative data. Our final accuracy rate is 0.919 and the credit company can use this prediction result as a reference to help them make decisions on whether lending loan to the client. 
+
+For future improvement, the Home Credit should work closely with Credits Bureau to collect more useful features and data in those clients who are unable to repay the loan on time. For the model, we can fine-tune the hyper-parameter of LightGBM such that increasing the number of estimators in classifiers and other decision tree related parameters for achieving a higher model performance.
+
+## VI. Reference
+[1]  Home Credit Default Risk. (n.d.). Retrieved from https://www.kaggle.com/c/home-credit-default-risk/data
+[2]  Lin, H. (n.d.). Machine Learning Foundations. Lecture. Retrieved from https://www.csie.ntu.edu.tw/~htlin/course/mlfound18fall/doc/01_handout.pdf.
+[3]  Chawla, N. V., Bowyer, K. W., Hall, L. O., & Kegelmeyer, W. P. (n.d.). SMOTE: Synthetic Minority Over-sampling Technique(Publication). doi:https://doi.org/10.1613/jair.953
 
 
 
